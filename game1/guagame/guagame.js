@@ -40,7 +40,6 @@ class guagame {
         this.actions[key] = callback
     }
     runloop() {
-        log(window.fps)
         var g = this
         //events
         var actions = Object.keys(g.actions)
