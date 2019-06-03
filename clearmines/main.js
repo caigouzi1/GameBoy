@@ -16,13 +16,29 @@ function main() {
         html += line
     }
     appendHtml(divChess, html)
-
+    // 绑定左击事件
     bindEvent(divChess, 'click', function (event){
         let target = event.target
         if(event.target.className === 'cell'){
             let data =target.dataset
             target.innerHTML = chess.arr[data.x][data.y]
         }
+    })
+
+    // 绑定右击事件
+    bindEvent(divChess, 'mousedown', function (event){
+        // 禁止右键弹出选项卡
+        divChess.oncontextmenu = function(e){
+            　　return false;
+        } 
+        let target = event.target
+        // 判断是否为右击操作
+        if(event.button==2){
+            if(target.classList.contains('cell')){
+                toggleClass(target, 'flag')
+            }
+        }
+     
     })
 }
 
