@@ -6,6 +6,8 @@ function getRandNum(num) {
     return Math.floor(Math.random() * num + 1)
 }
 
+// DOM部分
+
 // 获取页面元素
 var e = function (element) {
     return document.querySelector(element)
@@ -17,12 +19,12 @@ var appendHtml = function (element, html) {
 }
 
 // 绑定事件
-var bindEvent = function(element, eventName, callback) {
+var bindEvent = function (element, eventName, callback) {
     element.addEventListener(eventName, callback)
 }
 
 // 开关某一个类
-var toggleClass = function(element, className) {
+var toggleClass = function (element, className) {
     if (element.classList.contains(className)) {
         element.classList.remove(className)
     } else {
