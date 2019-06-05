@@ -67,7 +67,7 @@ function showAllBoom(chess) {
 }
 
 function main() {
-    var chess = new Chess(9, 9, 15)
+    var chess = new Chess(9, 9, 12)
     var divChess = e('#div-id-chess')
     var arr = chess.arr
     var html = insertHtml(arr)
@@ -129,7 +129,6 @@ function main() {
                     findMineNum--
                 }
             }
-            log(findMineNum)
             if (flagMineNum == chess.num) {
                 if (findMineNum == chess.num) {
                     alert('suc')
