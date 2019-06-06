@@ -2,7 +2,13 @@
 // 判断该位置并显示
 function setNode(arr, x, y) {
     let node = document.getElementById(`${x}x${y}`)
-    node.innerHTML = arr[x][y]
+    let num = arr[x][y]
+    node.innerHTML = num
+    node.classList.add(`x${num}`)
+    if (num > 4) {
+        node.classList.add(`x4`)
+    }
+
 }
 
 // 生成html页面并插入到网页中
@@ -26,6 +32,7 @@ function open(chess, intx, inty) {
     let arr = chess.arr
     let node = document.getElementById(`${x}x${y}`)
     let isUp = node.classList.contains('up')
+    // TODO: 如果是旗子则不应该被翻开
     if (isUp) {
         return
     } else {
@@ -66,8 +73,8 @@ function showAllBoom(chess) {
     })
 }
 
-function main() {
-    var chess = new Chess(9, 9, 12)
+function init(row, line, num) {
+    var chess = new Chess(row, line, num)
     var divChess = e('#div-id-chess')
     var arr = chess.arr
     var html = insertHtml(arr)
@@ -78,6 +85,7 @@ function main() {
     var flagMineNum = 0
 
     appendHtml(divChess, html)
+    appendHtml(e('#count'), `剩余地雷&nbsp${chess.num}&nbsp`)
 
     // 鼠标左击事件
     var leftClick = function (event) {
@@ -132,20 +140,29 @@ function main() {
             if (flagMineNum == chess.num) {
                 if (findMineNum == chess.num) {
                     alert('suc')
+                } else {
+                    // 全部标记但是有错误
+                    // alert('有错误')
                 }
-                // 全部标记但是有错误
-                alert('有错误')
             } else if (flagMineNum > chess.num) {
                 alert('game over')
                 // 解绑事件
                 divChess.removeEventListener("click", leftClick);
                 divChess.removeEventListener("mousedown", rightClick);
-
             }
+            countNum = chess.num - flagMineNum
+            if (countNum <= 0) {
+                countNum = 0
+            }
+            document.getElementById('count').innerHTML = `剩余地雷&nbsp${countNum}&nbsp`
         }
     }
     // 绑定右击事件
     bindEvent(divChess, 'mousedown', rightClick)
+}
+
+function main() {
+    init(9, 9, 9)
 }
 
 main()

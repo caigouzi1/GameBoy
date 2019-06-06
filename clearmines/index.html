@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src = 'tool.js'></script>
-    <script src = 'Chess.js'></script>
+    <script src='tool.js'></script>
+    <script src='Chess.js'></script>
     <style>
-        #div-id-chess{
-            width: 560px;
-            margin: 120px auto;
+        #count {
+            position: absolute;
+            top: -60px;
+            left: 80px;
+            text-align: center;
+            font: 30px arial, sans-serif;
         }
-        .line .cell{
+
+        #div-id-chess {
+            position: relative;
+            width: 560px;
+            margin: 150px auto;
+            text-align: center;
+        }
+
+        .line .cell {
             display: inline-block;
             border: 1px blue solid;
             font-size: 35px;
@@ -20,17 +32,42 @@
             height: 50px;
             line-height: 50px;
         }
-        .cell+.cell{
+
+        .cell+.cell {
             border-left: none;
         }
-        .flag{
+
+        .flag {
             background: red;
+            background: url('./img/flag.png');
+            background-size: 100%;
+        }
+        .x0{
+            background: rgb(87, 114, 101);
+            text-indent:-9999px;
+        }
+        .x1{
+            background: rgb(43, 145, 97);
+        }
+        .x2{
+            background: rgb(32, 35, 167);
+        }
+        .x3{
+            background: rgb(139, 70, 58);
+        }
+        .x4{
+            background: rgb(223, 44, 13);
         }
     </style>
     <title>扫雷</title>
 </head>
+
 <body>
-    <div id = 'div-id-chess'></div>
-    <script src = 'main.js'></script>
+
+    <div id='div-id-chess'>
+        <div id='count'></div>
+    </div>
+    <script src='main.js'></script>
 </body>
+
 </html>
