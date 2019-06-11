@@ -26,11 +26,12 @@
         .line .cell {
             display: inline-block;
             border: 1px blue solid;
-            font-size: 35px;
+            font-size: 0;
             text-align: center;
             width: 50px;
             height: 50px;
             line-height: 50px;
+            vertical-align: middle;
         }
 
         .cell+.cell {
@@ -41,22 +42,29 @@
             background: red;
             background: url('./img/flag.png');
             background-size: 100%;
+            z-index: 100;
         }
         .x0{
-            background: rgb(87, 114, 101);
-            text-indent:-9999px;
+            background: lightgreen;
+        }
+        .x{
+            font-size: 35px !important;
         }
         .x1{
             background: rgb(43, 145, 97);
+            font-size: 35px !important;
         }
         .x2{
             background: rgb(32, 35, 167);
+            font-size: 35px !important;
         }
         .x3{
             background: rgb(139, 70, 58);
+            font-size: 35px !important;
         }
         .x4{
             background: rgb(223, 44, 13);
+            font-size: 35px !important;
         }
     </style>
     <title>扫雷</title>

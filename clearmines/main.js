@@ -3,12 +3,14 @@
 function setNode(arr, x, y) {
     let node = document.getElementById(`${x}x${y}`)
     let num = arr[x][y]
-    node.innerHTML = num
-    node.classList.add(`x${num}`)
+    classname = `x${num}`
     if (num > 4) {
-        node.classList.add(`x4`)
+        classname = `x4`
+    }else if (num === 'x'){
+        classname =`x`
     }
-
+    node.classList.add(classname)
+    node.classList.add('isup')
 }
 
 // 生成html页面并插入到网页中
@@ -17,7 +19,7 @@ function insertHtml(arr) {
     for (let i = 0; i < arr.length; i++) {
         var line = `<div class = 'line'>`
         for (let j = 0; j < arr[i].length; j++) {
-            line += `<div id = "${i}x${j}" class = 'cell' data-x ='${i}' data-y = '${j}'>&nbsp</div>`
+            line += `<div id = "${i}x${j}" class = 'cell' data-x ='${i}' data-y = '${j}'>${arr[i][j]}</div>`
         }
         line += '</div>'
         html += line
@@ -30,9 +32,10 @@ function open(chess, intx, inty) {
     let x = Number(intx)
     let y = Number(inty)
     let arr = chess.arr
+    setNode(arr, x, y)
     let node = document.getElementById(`${x}x${y}`)
+    node.classList.add('isup')
     let isUp = node.classList.contains('up')
-    // TODO: 如果是旗子则不应该被翻开
     if (isUp) {
         return
     } else {
@@ -41,7 +44,8 @@ function open(chess, intx, inty) {
             for (let i = x - 1; i < x + 2; i++) {
                 for (let j = y - 1; j < y + 2; j++) {
                     if (chess.judgeCondition(i, j)) {
-                        if (i !== x || j !== y) {
+                        let isFlag = document.getElementById(`${i}x${j}`).classList.contains('flag')
+                        if ((i !== x || j !== y) && !isFlag) {
                             setNode(arr, i, j)
                             if (arr[i][j] === 0) {
                                 open(chess, i, j)
@@ -92,10 +96,11 @@ function init(row, line, num) {
         let target = event.target
         if (event.target.className === 'cell') {
             let data = target.dataset
-            target.innerHTML = chess.arr[data.x][data.y]
 
             // 判断是否爆炸
             if (chess.arr[data.x][data.y] === 'x') {
+                log(target)
+                // target.classList.add(`x`)
                 showAllBoom(chess)
                 alert('你玩的像cxk')
 
@@ -120,41 +125,45 @@ function init(row, line, num) {
 
         // 判断是否为右击操作
         if (event.button == 2) {
-            if (target.classList.contains('cell')) {
-                toggleClass(target, 'flag')
-            }
-
-            // 判断是否找出地雷并计数
-            let data = target.dataset
-            if (target.classList.contains('flag')) {
-                flagMineNum++
-                if (chess.arr[data.x][data.y] === 'x') {
-                    findMineNum++
+            cell = target.classList.contains('cell')
+            isup =target.classList.contains('isup')
+            if(!isup){
+                if (cell) {
+                    toggleClass(target, 'flag')
                 }
-            } else {
-                flagMineNum--
-                if (chess.arr[data.x][data.y] === 'x') {
-                    findMineNum--
-                }
-            }
-            if (flagMineNum == chess.num) {
-                if (findMineNum == chess.num) {
-                    alert('suc')
+    
+                // 判断是否找出地雷并计数
+                let data = target.dataset
+                if (target.classList.contains('flag')) {
+                    flagMineNum++
+                    if (chess.arr[data.x][data.y] === 'x') {
+                        findMineNum++
+                    }
                 } else {
-                    // 全部标记但是有错误
-                    // alert('有错误')
+                    flagMineNum--
+                    if (chess.arr[data.x][data.y] === 'x') {
+                        findMineNum--
+                    }
                 }
-            } else if (flagMineNum > chess.num) {
-                alert('game over')
-                // 解绑事件
-                divChess.removeEventListener("click", leftClick);
-                divChess.removeEventListener("mousedown", rightClick);
+                if (flagMineNum == chess.num) {
+                    if (findMineNum == chess.num) {
+                        alert('suc')
+                    } else {
+                        // 全部标记但是有错误
+                        // alert('有错误')
+                    }
+                } else if (flagMineNum > chess.num) {
+                    alert('game over')
+                    // 解绑事件
+                    divChess.removeEventListener("click", leftClick);
+                    divChess.removeEventListener("mousedown", rightClick);
+                }
+                countNum = chess.num - flagMineNum
+                if (countNum <= 0) {
+                    countNum = 0
+                }
+                document.getElementById('count').innerHTML = `剩余地雷&nbsp${countNum}&nbsp`
             }
-            countNum = chess.num - flagMineNum
-            if (countNum <= 0) {
-                countNum = 0
-            }
-            document.getElementById('count').innerHTML = `剩余地雷&nbsp${countNum}&nbsp`
         }
     }
     // 绑定右击事件
