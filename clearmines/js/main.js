@@ -106,8 +106,7 @@ function init(row, line, num) {
 
             // 判断是否爆炸
             if (chess.arr[data.x][data.y] === 'x') {
-                log(target)
-                // target.classList.add(`x`)
+                target.classList.add(`x`)
                 showAllBoom(chess)
                 alert('你玩的像cxk')
 
