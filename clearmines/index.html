@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src='tool.js'></script>
     <script src='Chess.js'></script>
+    <link rel="stylesheet" href="init.css">
     <style>
         #count {
             position: absolute;
@@ -23,47 +24,57 @@
             text-align: center;
         }
 
-        .line .cell {
-            display: inline-block;
-            border: 1px blue solid;
-            font-size: 0;
-            text-align: center;
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            vertical-align: middle;
+        #bigcell {
+            display: flex;
+            background-color: aquamarine;
+            border: solid 3px lightseagreen;
+            width: 468px;
+            height: 468px;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-content: space-around;
         }
 
-        .cell+.cell {
-            border-left: none;
+        .cell {
+            display: inline-block;
+            background-color: #fff;
+            font-size: 0;
+            width: 50px;
+            height: 50px;
         }
 
         .flag {
             background: red;
-            background: url('./img/flag.png');
+            background: url('./img/flag.jpg');
             background-size: 100%;
             z-index: 100;
         }
-        .x0{
+
+        .x0 {
             background: lightgreen;
         }
-        .x{
+
+        .x {
             font-size: 35px !important;
         }
-        .x1{
+
+        .x1 {
             background: rgb(43, 145, 97);
-            font-size: 35px !important;
         }
-        .x2{
+
+        .x2 {
             background: rgb(32, 35, 167);
-            font-size: 35px !important;
         }
-        .x3{
+
+        .x3 {
             background: rgb(139, 70, 58);
-            font-size: 35px !important;
         }
-        .x4{
+
+        .x4 {
             background: rgb(223, 44, 13);
+        }
+
+        .showfont {
             font-size: 35px !important;
         }
     </style>

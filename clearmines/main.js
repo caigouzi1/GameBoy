@@ -6,24 +6,31 @@ function setNode(arr, x, y) {
     classname = `x${num}`
     if (num > 4) {
         classname = `x4`
-    }else if (num === 'x'){
-        classname =`x`
+    } else if (num === 'x') {
+        classname = `x`
     }
-    node.classList.add(classname)
-    node.classList.add('isup')
+    if (num == 0) {
+        node.classList.add(classname)
+        node.classList.add('isup')
+    } else {
+        node.classList.add(classname)
+        node.classList.add('showfont')
+        node.classList.add('isup')
+    }
+
 }
 
 // 生成html页面并插入到网页中
 function insertHtml(arr) {
     let html = ''
     for (let i = 0; i < arr.length; i++) {
-        var line = `<div class = 'line'>`
+        var line = ''
         for (let j = 0; j < arr[i].length; j++) {
             line += `<div id = "${i}x${j}" class = 'cell' data-x ='${i}' data-y = '${j}'>${arr[i][j]}</div>`
         }
-        line += '</div>'
         html += line
     }
+    html = `<div id = 'bigcell'>${html}</div>`
     return html
 }
 
@@ -126,12 +133,12 @@ function init(row, line, num) {
         // 判断是否为右击操作
         if (event.button == 2) {
             cell = target.classList.contains('cell')
-            isup =target.classList.contains('isup')
-            if(!isup){
+            isup = target.classList.contains('isup')
+            if (!isup) {
                 if (cell) {
                     toggleClass(target, 'flag')
                 }
-    
+
                 // 判断是否找出地雷并计数
                 let data = target.dataset
                 if (target.classList.contains('flag')) {
@@ -147,6 +154,7 @@ function init(row, line, num) {
                 }
                 if (flagMineNum == chess.num) {
                     if (findMineNum == chess.num) {
+                        showAllBoom(chess)
                         alert('suc')
                     } else {
                         // 全部标记但是有错误
@@ -171,7 +179,7 @@ function init(row, line, num) {
 }
 
 function main() {
-    init(9, 9, 9)
+    init(9, 9, 10)
 }
 
 main()
