@@ -40,6 +40,11 @@ class Scene {
         })
     }
 
+    // 场景切换
+    replaceScene(obj){
+        return  obj
+    }
+
 
     // 画出图形
     draw() {
