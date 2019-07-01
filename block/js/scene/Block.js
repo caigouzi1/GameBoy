@@ -3,9 +3,12 @@ class Block {
         this.x = p[0]
         this.y = p[1]
         this.lifes = p[2] || 1
+        // 图片数组
+        this.images = images
+        // 显示的图片
         this.img = images[this.lifes]
-        this.h = 40
-        this.w = 20
+        this.h = 20
+        this.w = 40
         // let self = this
         // this.img.onload = function () {
         //     self.w = this.width
@@ -16,9 +19,14 @@ class Block {
         this.alive = true
     }
 
+    updateImg() {
+        this.img = this.images[this.lifes]
+    }
+
     kill() {
         if (this.lifes > 1) {
             this.lifes--
+            this.updateImg()
         } else {
             this.alive = false
         }

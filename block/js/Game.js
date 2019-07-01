@@ -15,7 +15,6 @@ class Game {
         window.addEventListener('keyup', event => {
             this.keydowns[event.key] = false
         })
-
         this.runloop()
 
         this.images = this.load(images)

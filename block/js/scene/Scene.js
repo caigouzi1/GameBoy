@@ -5,7 +5,8 @@ class Scene {
         this.paddle = new Paddle(game.images.paddle)
         this.ball = new Ball(game.images.ball, game.canvas.width, game.canvas.height)
         this.blocks = []
-        
+
+        this.level = null
         // 注册键盘响应
         this.register()
     }
@@ -34,15 +35,25 @@ class Scene {
         })
     }
 
-    loadBlock(bs) {
-        bs.forEach(k => {
+    loadBlock(n = 0) {
+        this.level = n
+        this.blocks = []
+        let levels = localStorage.levels || "[]"
+        levels = JSON.parse(levels)
+        if (levels.length == 0){
+            return
+        }
+        let level = levels[n]
+        log(levels)
+        level.forEach(k => {
+            log(k)
             this.blocks.push(new Block(this.game.images.block, k))
         })
     }
 
     // 场景切换
-    replaceScene(obj){
-        return  obj
+    replaceScene(obj) {
+        return obj
     }
 
 
