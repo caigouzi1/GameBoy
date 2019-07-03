@@ -44,9 +44,7 @@ class Scene {
             return
         }
         let level = levels[n]
-        log(levels)
         level.forEach(k => {
-            log(k)
             this.blocks.push(new Block(this.game.images.block, k))
         })
     }

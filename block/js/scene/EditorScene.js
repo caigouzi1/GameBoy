@@ -13,7 +13,7 @@ class EditorScene extends Scene {
                 } else if (x >= 300 && x <= 395) {
                     log('保存')
                     this.saveEdit()
-                    showLevel()
+                    showLevel(this)
                 }
             }
         })

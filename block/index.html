@@ -63,14 +63,13 @@
                     data.splice(n - 1, 1)
                     let str = JSON.stringify(data)
                     localStorage.levels = str
-                    showLevel()
+                    showLevel(scene)
                 } else if (event.target.localName == 'li') {
                     let n = event.target.dataset.n
                     scene.loadBlock(n - 1)
+                    showLevel(scene)
                 }
-
             })
-
         }
 
 
