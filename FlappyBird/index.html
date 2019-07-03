@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<title>FlaooyBird</title>
+<style>
+    canvas {
+        border: 1px black solid;
+    }
+</style>
+<script src="js/tool.js"></script>
+<script src="js/Game.js"></script>
+<script src="js/scene/Bird.js"></script>
+<script src="js/scene/Scene.js"></script>
+<script src="js/scene/ScenePlay.js"></script>
+
+<body>
+    <canvas id='id-canvas-draw' width="288" height="512"></canvas>
+    <script>
+
+        var main = function () {
+            // 图片资源路径
+            let images = {
+                bg: 'img/bg_day.png',
+                bird: {
+                    '0': 'img/bird/bird0_0.png',
+                    '1': 'img/bird/bird0_1.png',
+                    '2': 'img/bird/bird0_2.png',
+                }
+            }
+
+            var game = new Game(images, function () {
+                this.scence = new ScenePlay(this)
+                this.runloop()
+            })
+        }
+
+        main()
+    </script>
+</body>
+
+</html>
